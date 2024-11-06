@@ -35,7 +35,7 @@ export function SearchBar({ onSearch, onSearchClick }: SearchBarProps) {
 				placeholder="Search..."
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
-				className="flex-grow h-10 min-w-40 rounded-xl"
+				className="flex-grow h-10 min-w-40 rounded-xl border-0"
 			/>
 			<Button
 				type="submit"
