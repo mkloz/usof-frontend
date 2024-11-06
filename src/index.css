@@ -95,6 +95,6 @@ h6 {
 	}
 
 	::-webkit-scrollbar-thumb {
-		@apply rounded-full bg-bg-secondary border-3 border-transparent border-solid bg-clip-padding bg-neutral-200 dark:bg-neutral-800;
+		@apply rounded-full bg-bg-secondary border-3 border-transparent border-solid bg-clip-padding bg-neutral-200 dark:bg-neutral-950;
 	}
 }
