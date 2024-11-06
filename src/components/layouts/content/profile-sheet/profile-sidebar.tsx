@@ -62,7 +62,7 @@ export function ProfileSidebar() {
 				onClick={() => {
 					tokens.delete();
 					queryClient.invalidateQueries(userGroupOptions());
-					navigate(0);
+					navigate("/");
 				}}
 			>
 				Logout

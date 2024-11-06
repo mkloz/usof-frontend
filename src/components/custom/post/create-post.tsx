@@ -7,11 +7,17 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "~/components/ui/collapsible";
+import { useMe } from "~/queries/use-me-query";
 import { PostStatus } from "~/types/post";
 
 export function CreatePost() {
 	const [isOpen, toggle] = useToggle(false);
 	const queryClient = useQueryClient();
+	const me = useMe();
+
+	if (!me.exists) {
+		return null;
+	}
 
 	return (
 		<Collapsible
