@@ -29,14 +29,9 @@ export class PostApiService {
 	}
 
 	static async getMany(data: FilterPostsFormValues) {
-		try {
-			const response = await axios.get("/api/v1/posts", { params: data });
+		const response = await axios.get("/api/v1/posts", { params: data });
 
-			return PaginatedPostsValidator.parse(response.data);
-		} catch (error) {
-			console.error(error);
-			throw error;
-		}
+		return PaginatedPostsValidator.parse(response.data);
 	}
 
 	static async create(data: CreatePostDto) {
@@ -75,14 +70,9 @@ export class PostApiService {
 	}
 
 	static async delete(postId: number) {
-		try {
-			const response = await axios.delete(`/api/v1/posts/${postId}`);
+		const response = await axios.delete(`/api/v1/posts/${postId}`);
 
-			return PostValidator.parse(response.data);
-		} catch (error) {
-			console.error(error);
-			throw error;
-		}
+		return PostValidator.parse(response.data);
 	}
 
 	static async update(postId: number, data: Partial<CreatePostDto>) {

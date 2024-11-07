@@ -49,8 +49,7 @@ function ReplyComments({ comment }: CommentProps) {
 			{me.exists && status === PostStatus.PUBLISHED && (
 				<CreateCommentForm
 					defaultValues={{ parentId: comment.id, postId: comment.postId }}
-					onSuccess={(d) => {
-						console.log(d);
+					onSuccess={() => {
 						comments.refetch();
 					}}
 				/>

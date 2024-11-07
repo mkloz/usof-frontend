@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { FormOptional } from "~/types/common";
 import { IdValidator } from "~/utils/validators/id.validator";
 
 export const CreateCommentFormSchema = z.object({
-	parentId: IdValidator.shape.id.optional(),
+	parentId: FormOptional.pipe(IdValidator.shape.id.optional()),
 	postId: IdValidator.shape.id,
 	content: z.string().min(1, "Comment cannot be empty"),
 });
