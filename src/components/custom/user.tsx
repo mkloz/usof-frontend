@@ -56,7 +56,7 @@ export function User({ user }: UserProps) {
 					</div>
 				</div>
 				<div className="flex *:basis-1/2 gap-2">
-					{me.isAdmin && (
+					{me.isAdmin && me.data?.id !== user.id && (
 						<Button
 							onClick={() => {
 								deleteUser.mutate(user.id);
@@ -66,7 +66,7 @@ export function User({ user }: UserProps) {
 							Delete user
 						</Button>
 					)}
-					{me.isAdmin && (
+					{me.isAdmin && me.data?.id !== user.id && (
 						<CustomSelect
 							options={[
 								{ label: "Admin", value: UserRole.ADMIN },
