@@ -29,18 +29,18 @@ export default function PostPage() {
 	const [options, setOptions] = useState<GetManyOptions | null>(null);
 	const comments = useComments(options || undefined);
 	const queryClient = useQueryClient();
+	const lastViewedPosts = useLastViewedPosts();
 	const posts = usePosts(
 		{ userId: post.data?.authorId || 0 },
 		{ enabled: !!post.data?.authorId }
 	);
-	const lastViewedPosts = useLastViewedPosts();
 	const me = useMe();
 	const status = post.data?.status || PostStatus.PUBLISHED;
 	const isEmpty = posts.data?.pages.at(0)?.items.length === 0;
 
 	useEffect(() => {
 		if (post.data) {
-			lastViewedPosts.add(post.data);
+			lastViewedPosts.add(post.data.id);
 		}
 	}, [lastViewedPosts, post.data]);
 

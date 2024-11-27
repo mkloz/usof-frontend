@@ -1,10 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
 import { createStore, useStore } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { IPost } from "~/types/post";
+import { PostApiService } from "~/services/post-api.service";
 
 interface ILastViewedPostsStore {
-	posts: IPost[];
-	add: (post: IPost) => void;
+	postIds: number[];
+	add: (postId: number) => void;
 	remove: (postId: number) => void;
 	clear: () => void;
 }
@@ -12,23 +13,41 @@ interface ILastViewedPostsStore {
 export const lastViewedPostsStore = createStore(
 	persist<ILastViewedPostsStore>(
 		(set) => ({
-			posts: [],
-			add: (post) =>
+			postIds: [],
+			add: (postId) =>
 				set((state) => {
-					if (state.posts.some((e) => e.id === post.id)) return state;
-					return { posts: [post, ...state.posts.slice(0, 9)] };
+					if (state.postIds.includes(postId)) return state;
+					return { postIds: [postId, ...state.postIds.slice(0, 9)] };
 				}),
 			remove: (postId) =>
 				set((state) => ({
-					posts: state.posts.filter((post) => post.id !== postId),
+					postIds: state.postIds.filter((id) => id !== postId),
 				})),
-			clear: () => set({ posts: [] }),
+			clear: () => set({ postIds: [] }),
 		}),
 		{
-			name: "last-viewed-posts",
+			name: "last-viewed-post-ids",
 			storage: createJSONStorage(() => sessionStorage),
 		}
 	)
 );
 
-export const useLastViewedPosts = () => useStore(lastViewedPostsStore);
+export const useLastViewedPostsStore = () => useStore(lastViewedPostsStore);
+
+export const useLastViewedPosts = () => {
+	const lastViewed = useLastViewedPostsStore();
+
+	return {
+		query: useQuery({
+			queryKey: ["posts", "last-viewed", lastViewed.postIds],
+			queryFn: async () => {
+				const posts = await Promise.all(
+					lastViewed.postIds.map((id) => PostApiService.get(id))
+				);
+				return posts;
+			},
+			enabled: lastViewed.postIds.length > 0,
+		}),
+		...lastViewed,
+	};
+};

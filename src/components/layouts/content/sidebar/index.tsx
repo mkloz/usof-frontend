@@ -7,6 +7,7 @@ import {
 	X,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import Loading from "~/components/async/loading";
 import { Link } from "~/components/custom/link";
 import { ShortPostCard } from "~/components/custom/post/short-post-card";
 import { Button } from "~/components/ui/button";
@@ -74,7 +75,7 @@ export function Sidebar() {
 				</Link>
 			)}
 			<Separator />
-			{!!lastViewedPosts.posts.length && (
+			{!!lastViewedPosts.query.data?.length && (
 				<>
 					<div className="flex">
 						<h3 className="ml-2">Last viewed</h3>
@@ -89,7 +90,7 @@ export function Sidebar() {
 					</div>
 					<ScrollArea>
 						<ul>
-							{lastViewedPosts.posts.map((post) => (
+							{lastViewedPosts.query.data.map((post) => (
 								<li key={post.id}>
 									<ShortPostCard post={post} />
 								</li>
@@ -98,6 +99,7 @@ export function Sidebar() {
 					</ScrollArea>
 				</>
 			)}
+			{lastViewedPosts.query.isLoading && <Loading />}
 		</aside>
 	);
 }
