@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://usof.mkloz.online/">
+  <a href="https://usof.mkloz.com/">
     <img src="./public/logo.svg" width="100" />
     <h1 align="center">USOF</h1>
   </a>
