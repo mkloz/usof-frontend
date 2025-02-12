@@ -19,14 +19,14 @@ import { useLastViewedPosts } from "~/stores/last-viewed-posts.store";
 
 const TABS = [
 	{
-		href: "/posts/popular",
-		icon: ArrowBigUpDash,
-		label: "Popular",
-	},
-	{
 		href: "/posts/recent",
 		icon: Compass,
 		label: "Recent",
+	},
+	{
+		href: "/posts/popular",
+		icon: ArrowBigUpDash,
+		label: "Popular",
 	},
 	{
 		href: "/categories",

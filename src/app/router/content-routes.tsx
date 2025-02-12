@@ -13,7 +13,7 @@ import UserPage from "~/pages/users/[id]";
 import UserMePage from "~/pages/users/me";
 
 const routes: RouteObject[] = [
-	{ path: "/", loader: () => redirect("/posts/popular") },
+	{ path: "/", loader: () => redirect("/posts/recent") },
 	{ path: "/posts", element: <PostsPage /> },
 	{ path: "/posts/popular", element: <PopularPostsPage /> },
 	{ path: "/posts/recent", element: <RecentPostsPage /> },
